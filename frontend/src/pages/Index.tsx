@@ -1,17 +1,51 @@
+import TerminalHeader from "@/components/TerminalHeader";
+import InputSection from "@/components/InputSection";
+import { useState } from "react";
+import { toast } from "sonner";
+import { proxyFetch } from "@/pages/api-proxy";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import ResultDisplay from "@/components/ResultDisplay";
+import Disclaimer from "@/components/Disclaimer";
+// import { playErrorBeep } from "@/lib/sounds";
+
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<"real" | "fake" | null>(null);
+
+  const analyzeText = async (text: string) => {
+    setIsLoading(true);
+    setResult(null);
+
+    try {
+      const prediction = await proxyFetch(text);
+
+      if (prediction) {
+        setResult(prediction);
+        // playErrorBeep();
+      } else {
+        // playErrorBeep();
+      }
+    } catch (error) {
+      console.error("Analysis failed:", error);
+      toast("Analysis Error", {
+        description: "Failed to analyze the text. Please try again.",
+        // variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold mb-4">
-        Welcome to Fake News Classifier
-      </h1>
-      <p className="text-xl text-gray-600 mb-4">
-        This is a full-stack web application that classifies news articles as
-        either fake or real using a machine learning model built in Python,
-        served via a Flask API, and a Next.js frontend.
-      </p>
-      <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-        Return to Home
-      </a>
+    <div className="min-h-screen bg-terminal-black px-4 py-8">
+      <div className="container max-w-3xl mx-auto space-y-6">
+        <TerminalHeader />
+
+        <InputSection onSubmit={analyzeText} isLoading={isLoading} />
+        <div className="min-h-[200px] flex items-center justify-center">
+          {isLoading ? <LoadingSpinner /> : <ResultDisplay result={result} />}
+        </div>
+        <Disclaimer />
+      </div>
     </div>
   );
 };
