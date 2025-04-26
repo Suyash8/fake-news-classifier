@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import joblib
 import re
 
@@ -19,6 +20,9 @@ def preprocess_input_text(text):
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Enable CORS
+CORS(app)
 
 # Prediction endpoint
 @app.route('/predict', methods=['POST'])
