@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface ResultDisplayProps {
   result: "real" | "fake" | null;
 }
 
 const ResultDisplay: React.FC<ResultDisplayProps> = ({ result }) => {
-  const [showCursor, setShowCursor] = useState(true);
   const [displayText, setDisplayText] = useState("");
+  const [showCursor, setShowCursor] = useState(true);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
   const fullText =
     result === "real"
       ? "ANALYSIS COMPLETE: REAL NEWS"
@@ -14,21 +16,28 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result }) => {
 
   useEffect(() => {
     if (result) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+
       setDisplayText("");
+      setShowCursor(true);
+
       let i = 0;
-      const typingInterval = setInterval(() => {
-        if (i < fullText.length) {
-          setDisplayText((prev) => prev + fullText.charAt(i));
+      intervalRef.current = setInterval(() => {
+        if (i <= fullText.length) {
+          // Important: no callback, just directly set from fullText slice
+          setDisplayText(fullText.slice(0, i));
           i++;
         } else {
-          clearInterval(typingInterval);
+          clearInterval(intervalRef.current!);
           setTimeout(() => setShowCursor(false), 500);
         }
       }, 50);
-
-      return () => clearInterval(typingInterval);
     }
-  }, [result, fullText]);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [result]);
 
   if (!result) return null;
 
