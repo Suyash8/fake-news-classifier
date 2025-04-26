@@ -35,26 +35,26 @@ y_pred = model.predict(X_test_tfidf)
 print("\n🔍 Classification Report:")
 print(classification_report(y_test, y_pred))
 
-# Confusion Matrix
-cm = confusion_matrix(y_test, y_pred)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-disp.plot()
-plt.title("Confusion Matrix")
-plt.show()
+# # Confusion Matrix
+# cm = confusion_matrix(y_test, y_pred)
+# disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+# disp.plot()
+# plt.title("Confusion Matrix")
+# plt.show()
 
-# ROC Curve
-y_proba = model.predict_proba(X_test_tfidf)[:, 1]
-fpr, tpr, _ = roc_curve(y_test, y_proba)
-roc_auc = auc(fpr, tpr)
+# # ROC Curve
+# y_proba = model.predict_proba(X_test_tfidf)[:, 1]
+# fpr, tpr, _ = roc_curve(y_test, y_proba)
+# roc_auc = auc(fpr, tpr)
 
-plt.figure()
-plt.plot(fpr, tpr, color='darkorange', lw=2, label=f"ROC curve (AUC = {roc_auc:.2f})")
-plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-plt.xlabel("False Positive Rate")
-plt.ylabel("True Positive Rate")
-plt.title("Receiver Operating Characteristic")
-plt.legend(loc="lower right")
-plt.show()
+# plt.figure()
+# plt.plot(fpr, tpr, color='darkorange', lw=2, label=f"ROC curve (AUC = {roc_auc:.2f})")
+# plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+# plt.xlabel("False Positive Rate")
+# plt.ylabel("True Positive Rate")
+# plt.title("Receiver Operating Characteristic")
+# plt.legend(loc="lower right")
+# plt.show()
 
 # Save model and vectorizer
 joblib.dump(model, 'model/model.pkl')

@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: fake-news-classifier-backend
+    runtime: python
+    buildCommand: ""
+    startCommand: python app.py
+    plan: free
