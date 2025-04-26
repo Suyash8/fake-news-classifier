@@ -29,6 +29,21 @@ yarn-error.log*
 dist/
 out/
 
+logs
+pnpm-debug.log*
+lerna-debug.log*
+
+dist-ssr
+*.local
+
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
 # ====================
 # OS + IDE files
 # ====================
