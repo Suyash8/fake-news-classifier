@@ -3,5 +3,5 @@ services:
     name: fake-news-classifier-backend
     runtime: python
     buildCommand: ""
-    startCommand: python app.py
+    startCommand: gunicorn app:app --bind 0.0.0.0:5000
     plan: free
