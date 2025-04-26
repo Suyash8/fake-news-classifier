@@ -1,0 +1,38 @@
+# ====================
+# Python
+# ====================
+__pycache__/
+*.py[cod]
+*.pkl
+*.joblib
+*.log
+*.db
+.env
+.venv/
+env/
+venv/
+.idea/
+.DS_Store
+
+# ====================
+# Node (Next.js)
+# ====================
+node_modules/
+.next/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+out/
+
+# ====================
+# OS + IDE files
+# ====================
+.vscode/
+*.swp
+*.swo
+Thumbs.db
