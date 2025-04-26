@@ -4,8 +4,8 @@ This is a full-stack web application that classifies news articles as either fak
 
 ## Live Demo (not deployed yet)
 
-Frontend: [https://your-frontend-link.vercel.app](https://your-frontend-link.vercel.app)  
-Backend API: [https://your-backend-link.onrender.com](https://your-backend-link.onrender.com)
+Frontend: [https://fake-news-classifier-1-0uqz.onrender.com](https://fake-news-classifier-1-0uqz.onrender.com)  
+Backend API: [https://fake-news-classifier-n28s.onrender.com](https://fake-news-classifier-n28s.onrender.com)
 
 ## Tech Stack
 
@@ -19,9 +19,9 @@ Backend API: [https://your-backend-link.onrender.com](https://your-backend-link.
 
 ### Frontend
 
-- Next.js (React + TypeScript)
+- Vite (React + TypeScript)
 - Tailwind CSS
-- Vercel (for deployment)
+- Render (for deployment)
 
 ## How It Works
 
